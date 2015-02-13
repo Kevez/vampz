@@ -1,0 +1,5 @@
+# don't commit generated node modules
+node_modules
+
+# don't commit compiled CSS file
+assets/css/main.css
