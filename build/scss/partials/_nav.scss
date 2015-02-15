@@ -1,3 +1,28 @@
 .nav {
+	background: #ccc;
+	bottom: 0;
+	position: fixed;
 	width: 100%;
+
+	ul {
+		margin: 0 auto;
+		overflow: hidden;
+		padding: 0;
+
+		li {
+			box-sizing: border-box;
+			float: left;
+			width: 25%;
+
+			a {
+				display: block;
+				padding: 10px 0;
+				text-align: center;
+
+				&:hover {
+					background: red;
+				}
+			}
+		}
+	}
 }
