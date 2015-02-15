@@ -8,7 +8,7 @@ app.controller('StatsCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.level = null;
 
 	$scope.getStats = function () {
-		$http.get('api/stats').success(function (user) {
+		$http.get('php/api/stats').success(function (user) {
 			console.log(user);
 
 			$scope.level = user.level
