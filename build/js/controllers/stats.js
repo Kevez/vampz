@@ -5,13 +5,13 @@
 app.controller('StatsCtrl', ['$scope', '$http', function ($scope, $http) {
 	console.log('StatsCtrl');
 
-	$scope.level = null;
+	$scope.user = [];
 
 	$scope.getStats = function () {
-		$http.get('php/api/stats').success(function (user) {
-			console.log(user);
+		$http.get('php/api/stats').success(function (data) {
+			console.log(data);
 
-			$scope.level = user.level
+			$scope.user = data.user;
 
 		}).error(function () {
 			console.log('An error occurred.');

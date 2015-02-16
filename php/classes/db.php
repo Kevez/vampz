@@ -11,9 +11,9 @@ Class Db {
 	public function __construct() {
 
 		// Connect to Amazon development RDS
-		$this->host = 'localhost'; // Change to RDS Endpoint when ready
+		$this->host = 'vampz-rds-dev.cfwbg1pys1mn.us-west-2.rds.amazonaws.com'; // Change to RDS Endpoint when ready
 		$this->username = 'vampz001';
-		$this->password = '3cLtmhmovjQN3DZ';
+		$this->password = 'DxV2Fc21gb2PJAM';
 		$this->dbname = 'vampz';
 
 		try {

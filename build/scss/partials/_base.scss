@@ -1,3 +1,11 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	background: #333;
+}
+
 ul {
 	margin: 0 auto;
 	padding: 0;
@@ -5,4 +13,8 @@ ul {
 
 li {
 	list-style: none;
+}
+
+.container {
+	height: 100%;
 }

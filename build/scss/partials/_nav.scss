@@ -1,5 +1,5 @@
 .nav {
-	background: #ccc;
+	background: #444;
 	bottom: 0;
 	position: fixed;
 	width: 100%;
@@ -15,12 +15,14 @@
 			width: 25%;
 
 			a {
+				color: #fff;
 				display: block;
 				padding: 10px 0;
 				text-align: center;
-
+				text-decoration: none;
+				
 				&:hover {
-					background: red;
+					background: #555;
 				}
 			}
 		}
