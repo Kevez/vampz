@@ -2,8 +2,21 @@
 ** header.js
 */
 
-app.controller('HeaderCtrl', ['$scope', function ($scope) {
-	console.log('HeaderCtrl');
+app.controller('HeaderCtrl', ['$scope', '$http', function ($scope, $http) {
 
-	// todo - http call to get user stats and inject them into the header
+	$scope.user = [];
+
+	$scope.getStats = function () {
+		$http.get('php/api/stats').success(function (data) {
+			console.log(data);
+
+			$scope.user = data.user;
+
+		}).error(function () {
+			console.log('An error occurred.');
+		});
+	};
+
+	$scope.getStats();
+
 }]);

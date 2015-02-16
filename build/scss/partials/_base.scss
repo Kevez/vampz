@@ -3,7 +3,20 @@ html, body {
 }
 
 body {
-	background: #333;
+	background: $app-bg;
+	font: 16px 'Varela Round';
+	margin: 0 auto;
+	padding: 0;
+}
+
+h2 {
+	color: #000;
+	font-size: 1.2rem;
+}
+
+p {
+	color: #000;
+	font-size: 1rem;
 }
 
 ul {
@@ -13,6 +26,30 @@ ul {
 
 li {
 	list-style: none;
+}
+
+button {
+	background: #ddd;
+	border: 1px solid #000;
+}
+
+table {
+	width: 100%;
+
+	&.two-col {
+		td {
+			width: 50%;
+		}
+	}
+
+}
+
+td {
+	color: #000;
+
+	.btn {
+		width: 100%;
+	}
 }
 
 .container {

@@ -2,7 +2,7 @@
 <html ng-app="app">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Vampz</title>
+	<title>Whitelabel Mobile RPG</title>
 	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Varela+Round' />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -11,7 +11,20 @@
 <body>
 	<div class="container">
 		<header class="header" ng-controller="HeaderCtrl">
-			<h1 class="title">Vampz</h1>
+			<ul>
+				<li>
+					<span class="label">Username</span>
+					<span class="value">{{user.username}}</span>
+				</li>
+				<li>
+					<span class="label">Level</span>
+					<span class="value">{{user.level}}</span>
+				</li>
+				<li>
+					<span class="label">Exp</span>
+					<span class="value">{{user.exp}}/{{user.exp_level}}</span>
+				</li>
+			</ul>
 		</header>
 		<section id="content">
 			<div class="inner-content">
