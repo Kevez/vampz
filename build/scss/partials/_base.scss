@@ -1,3 +1,9 @@
+* {
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
 html, body {
 	height: 100%;
 }
@@ -34,8 +40,10 @@ li {
 }
 
 button {
-	background: #ddd;
+	background: #fff;
 	border: 1px solid #000;
+	font: 1rem 'Varela Round';
+	padding: 5px 0;
 }
 
 table {
@@ -59,4 +67,8 @@ td {
 
 .container {
 	height: 100%;
+}
+
+strong, b {
+	font-weight: bold;
 }

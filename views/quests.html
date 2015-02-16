@@ -1,2 +1,11 @@
 <h1>Quests</h1>
-<p>This is the quests page.</p>
+<p>As you can see, quests cannot be completed yet.</p>
+
+<ul>
+	<li class="quest-item" ng-repeat="quest in quests">
+		<span class="name">{{quest.name}}</span>
+		<span class="loot">Loot: +{{quest.loot[0]}} Exp</span>
+		<span class="requires">Requires {{quest.energy}} Energy</span>
+		<button class="btn do" ng-click="do()">Do</button>
+	</li>
+</ul>
