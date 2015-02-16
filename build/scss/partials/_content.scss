@@ -1,15 +1,28 @@
 .inner-content {
-	padding-left: 10px;
-}
+	padding: 0 10px 50px 10px;
 
-h2 {
-	color: #fff;
-}
+	.quest-item {
+		background: $mid-grey;
+		margin-bottom: 10px;
+		padding: 10px 0;
+		position: relative;
+		width: 100%;
 
-p {
-	color: #fff;
-}
+		span {
+			color: $text;
+			display: block;
+			padding-left: 10px;
 
-td {
-	color: #fff;
+			.name {
+				font-weight: bold;
+			}
+		}
+
+		.do {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			width: 25%;
+		}
+	}
 }

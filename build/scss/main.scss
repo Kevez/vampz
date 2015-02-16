@@ -1,6 +1,8 @@
-@import 'partials/_base.scss';
-@import 'partials/_content.scss';
-@import 'partials/_header.scss';
-@import 'partials/_nav.scss';
-@import 'partials/_notifications.scss';
-@import 'partials/_reset.scss';
+@import 'partials/_variables';
+
+// Structure
+@import 'partials/_base';
+@import 'partials/_content';
+@import 'partials/_header';
+@import 'partials/_nav';
+@import 'partials/_notifications';

@@ -1,9 +1,33 @@
+* {
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
 html, body {
 	height: 100%;
 }
 
 body {
-	background: #333;
+	background: $app-bg;
+	font: 16px 'Varela Round';
+	margin: 0 auto;
+	padding: 0;
+}
+
+h1 {
+	color: #000;
+	font-size: 1.3rem;
+}
+
+h2 {
+	color: #000;
+	font-size: 1.2rem;
+}
+
+p {
+	color: #000;
+	font-size: 1rem;
 }
 
 ul {
@@ -15,6 +39,36 @@ li {
 	list-style: none;
 }
 
+button {
+	background: #fff;
+	border: 1px solid #000;
+	font: 1rem 'Varela Round';
+	padding: 5px 0;
+}
+
+table {
+	width: 100%;
+
+	&.two-col {
+		td {
+			width: 50%;
+		}
+	}
+
+}
+
+td {
+	color: #000;
+
+	.btn {
+		width: 100%;
+	}
+}
+
 .container {
 	height: 100%;
+}
+
+strong, b {
+	font-weight: bold;
 }
