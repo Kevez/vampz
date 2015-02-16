@@ -1,7 +1,11 @@
 .header {
 	background: #444;
+	padding: 10px 0;
+	position: fixed;
 	text-align: center;
+	top: 0;
 	width: 100%;
+	z-index: 5;
 
 	ul {
 

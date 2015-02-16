@@ -23,6 +23,18 @@ Class User {
 		return $user;
 	}
 
+	public function updateStat($field, $newVal) {
+
+		// $result = $this->_db->query("SELECT id, username FROM users WHERE id = 1");
+		// while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+		// 	array_push($user, $row);
+		// }
+
+		$this->_db->query("UPDATE users SET $field = $newVal WHERE id = 1");
+
+		//return $user;
+	}
+
 	// public function getPost($id) {
 	// 	$result = $this->_db->query("SELECT id, title, content, created FROM posts WHERE id = {$id}");
 	// 	$post = $result->fetch_array(MYSQLI_ASSOC);

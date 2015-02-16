@@ -1,2 +1,19 @@
 <h1>Fight</h1>
-<p>You can fight other Vampz here.</p>
+<p>You'll be able to fight other Vampz here soon.</p>
+
+<div ng-show="loading">
+	<p>Loading...</p>
+</div>
+
+<div class="success" ng-show="fightCompleted">
+	<p>You won the fight against Player {{summary.opponent_id}} and looted {{summary.blood}} Blood. You also gained {{summary.exp}} Exp.</p>
+</div>
+
+<ul>
+	<li class="player-item" ng-repeat="player in playerss">
+		<span class="name">{{player.name}}</span>
+		<!-- <span class="loot">Loot: +{{quest.exp}} Exp, +{{quest.blood}} Blood</span> -->
+		<!-- <span class="requires">Requires {{quest.energy}} Energy</span> -->
+		<button class="btn do" ng-click="fight(player.id)">Fight</button>
+	</li>
+</ul>

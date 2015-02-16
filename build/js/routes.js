@@ -6,6 +6,10 @@
 app.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider
 		.when('/', {
+			templateUrl: 'views/login.html',
+			controller: 'LoginCtrl'
+		})
+		.when('/stats', {
 			templateUrl: 'views/stats.html',
 			controller: 'StatsCtrl'
 		})

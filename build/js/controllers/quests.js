@@ -2,29 +2,40 @@
 ** quests.js
 */
 
-app.controller('QuestsCtrl', ['$scope', '$http', function ($scope, $http) {
+app.controller('QuestsCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
 
-	console.log('QuestsCtrl');
+	$scope.quest = null;
+	$scope.quests = null;
+	$scope.questCompleted = false;
+	$scope.loading = false;
 
-	$scope.quests = [
-		{ name: 'Quest 1', loot: [5, 10], energy: 1 },
-		{ name: 'Quest 2', loot: [5, 10], energy: 1 },
-		{ name: 'Quest 3', loot: [5, 10], energy: 1 },
-		{ name: 'Quest 4', loot: [5, 10], energy: 1 },
-		{ name: 'Quest 5', loot: [5, 10], energy: 1 }
-	];
+	$scope.getQuests = function () {
+		$http.get('php/api/quests').success(function (data) {
+			console.log(data);
+			$scope.quests = data;
+		});
+	};
 
-	// $scope.getQuests = function () {
-	// 	$http.get('php/api/quests').success(function (data) {
-	// 		console.log(data);
+	$scope.do = function (id) {
+		console.log('doQuest', id);
 
-	// 		//$scope.user = data.user;
+		$scope.questCompleted = false;
+		$scope.loading = true;
 
-	// 	}).error(function () {
-	// 		console.log('An error occurred.');
-	// 	});
-	// };
+		$http.get('php/api/quests/do.php').success(function (data) {
+		
+			$scope.quest = data.quest; 
+			$scope.questCompleted = true;
+			$scope.loading = false;
 
-	// $scope.getQuests();
+			$rootScope.$emit('statsUpdated', data.user);
+
+			// shift the viewport to the top
+			document.body.scrollTop = document.documentElement.scrollTop = 0;
+		});
+
+	};
+
+	$scope.getQuests();
 	
 }]);

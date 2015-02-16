@@ -2,21 +2,22 @@
 ** header.js
 */
 
-app.controller('HeaderCtrl', ['$scope', '$http', function ($scope, $http) {
+app.controller('HeaderCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
 
-	$scope.user = [];
+	$scope.user = {};
 
 	$scope.getStats = function () {
+		console.log('getStats');
 		$http.get('php/api/stats').success(function (data) {
-			console.log(data);
-
 			$scope.user = data.user;
-
-		}).error(function () {
-			console.log('An error occurred.');
 		});
 	};
 
 	$scope.getStats();
+
+	// Listen for stat changes
+	$rootScope.$on('statsUpdated', function (evt, data) { 
+    $scope.user = data;
+  });
 
 }]);

@@ -2,22 +2,21 @@
 ** stats.js
 */
 
-app.controller('StatsCtrl', ['$scope', '$http', function ($scope, $http) {
-	console.log('StatsCtrl');
+app.factory('UserFactory', function () {
 
-	$scope.user = [];
+	var user = {};
 
-	$scope.getStats = function () {
-		$http.get('php/api/stats').success(function (data) {
-			console.log(data);
+	return {
+		getUser: function () {
+			return user;
+		},
+		setUser: function (obj) {
+			console.log(obj);
+			user = obj
+		}
+	}
+});
 
-			$scope.user = data.user;
-
-		}).error(function () {
-			console.log('An error occurred.');
-		});
-	};
-
-	$scope.getStats();
-	
+app.controller('StatsCtrl', ['$scope', '$http', 'UserFactory', function ($scope, $http, UserFactory) {
+	console.log('StatsCtrl', UserFactory);	
 }]);

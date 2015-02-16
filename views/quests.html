@@ -1,11 +1,19 @@
 <h1>Quests</h1>
 <p>As you can see, quests cannot be completed yet.</p>
 
+<div ng-show="loading">
+	<p>Loading...</p>
+</div>
+
+<div class="success" ng-show="questCompleted">
+	<p>You completed quest {{quest.id}} and looted {{quest.blood}} Blood.</p>
+</div>
+
 <ul>
 	<li class="quest-item" ng-repeat="quest in quests">
 		<span class="name">{{quest.name}}</span>
-		<span class="loot">Loot: +{{quest.loot[0]}} Exp</span>
+		<span class="loot">Loot: +{{quest.exp}} Exp, +{{quest.blood}} Blood</span>
 		<span class="requires">Requires {{quest.energy}} Energy</span>
-		<button class="btn do" ng-click="do()">Do</button>
+		<button class="btn do" ng-click="do(quest.id)">Do</button>
 	</li>
 </ul>
