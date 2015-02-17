@@ -35,16 +35,9 @@ function formatNumber(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function applyTheme() {
-  $('body').css('background', app.theme.bodyBackground);
-  $('#header').css({'background': app.theme.headerBackground, 'border-bottom': app.theme.headerBorderBottom});
-  $('#footer').css('background', app.theme.footerBackground);
-  $('#app-name').text(app.name);
-}
-
 function buildNav() {
   for ( var i = 0; i < app.mainNavIcons.length; i++ ) {
-    $('#footer').append('<div class="col-xs-2 text-center nav-item" onclick="nav(' + (i + 1) + ')"><i class="fa fa-' + app.mainNavIcons[i] + '"></i><br/><span class="nav-label">' + app.mainNavLabels[i] + '</span></div>');
+    $('.footer').append('<div class="col-xs-2 text-center nav-item" onclick="nav(' + (i + 1) + ')"><i class="fa fa-' + app.mainNavIcons[i] + '"></i><br/><span class="nav-label">' + app.mainNavLabels[i] + '</span></div>');
   }
 }
 
@@ -127,7 +120,7 @@ function loadPage(tpl, script) {
         missionId = ((data.area - 1) * 10 + (i + 1));
 
         missionsHTML += '<div class="panel">';
-        missionsHTML += '<div class="panel-heading" style="position:relative">' + mission[0] + '<div class="mission-mastery-fill-holder"><div id="mission-mastery-fill-' + missionId + '" class="mission-mastery-fill" style="width:' + data.user['m' + missionId] + '%">';
+        missionsHTML += '<div class="panel-heading" style="position:relative">' + mission[0] + '<div class="mission-mastery-fill-holder"><div id="mission-mastery-fill-' + missionId + '" class="fill" style="width:' + data.user['m' + missionId] + '%">';
 
         if (data.user['m' + (i + 1)] == 100) {
           missionsHTML += 'Mastered <i class="fa fa-star yellow-text"></i>';
@@ -265,7 +258,6 @@ function loadPage(tpl, script) {
 }
 
 $(function () {
-  applyTheme();
   buildNav();
   loadPage('stats', 'api.php?action=page-stats');
   displayStats();

@@ -7,20 +7,26 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Varela+Round' />
-    <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/vampz-cdn/main.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
   </head>
 
   <body>
 
     <div class="container">
-      <header id="header">
+      <header class="header">
         <div class="row" id="stats-row">
-          <div class="col-xs-3 text-center"><i class="fa fa-tint red-text"></i> <span id="stat-blood">-</span><br/><span id="app-blood">Blood</span></div>    
+          <div class="col-xs-3 text-center"><i class="fa fa-tint red-text"></i> 
+          <span id="stat-blood" class="stat">-</span><br/>
+          <span id="app-blood">Blood</span></div>    
           <div class="col-xs-3">
-            <div id="energy-values"><i class="fa fa-bolt"></i> <span id="stat-energy">-</span>/<span id="stat-energy-max">-</span><br/><span id="energy-timer">-</span></div>
+            <div id="energy-values">
+            	<i class="fa fa-bolt"></i> 
+            	<span id="stat-energy" class="stat">-</span>/<span id="stat-energy-max" class="stat">-</span>
+            	<br/><span id="energy-timer">-</span>
+            </div>
           </div>
-          <div class="col-xs-3 text-center"><i class="fa fa-shield blue-text"></i> <span id="stat-level" class="blue-text">-</span><br/><span id="label-level" class="blue-text">Level</div>
-          <div class="col-xs-3 text-center"><i class="fa fa-codepen green-text"></i> <span id="stat-shards">0</span><br/><span id="label-shards">Shards</span></div>    
+          <div class="col-xs-3 text-center"><i class="fa fa-shield blue-text"></i> <span id="stat-level" class="blue-text stat">-</span><br/><span id="label-level" class="blue-text">Level</div>
+          <div class="col-xs-3 text-center"><i class="fa fa-codepen green-text"></i> <span id="stat-shards" class="stat">0</span><br/><span id="label-shards">Shards</span></div>    
         </div>
         <div class="row" id="exp-bar-container">
           <div class="col-xs-12">
@@ -39,8 +45,9 @@
       <section id="content">
         <p></p>
       </section>
-      <footer id="footer" class="navbar navbar-fixed-bottom"></footer>
     </div>
+
+    <footer class="footer"></footer>
 
     <!-- //// STATS TEMPLATE /// -->
     <div id="stats-tpl">
@@ -245,6 +252,6 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="https://s3-us-west-2.amazonaws.com/vampz-cdn/main.js"></script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

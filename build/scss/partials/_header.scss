@@ -1,32 +1,12 @@
 .header {
-	background: #444;
-	height: 60px;
-	padding: 10px 0;
+	background: #300;
 	position: fixed;
-	text-align: center;
-	top: 0;
-	width: 100%;
-	z-index: 5;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
 
-	ul {
-
-		overflow: hidden;
-		width: 100%;
-
-		li {
-			color: #fff;
-			float: left;
-			text-align: center;
-			width: 33.333333%;
-
-			.label {
-				display: block;
-				font-weight: bold;
-			}
-
-			.value {
-				display: block;
-			}
-		}
+	.stat {
+		font-size: 1.2rem;
 	}
 }

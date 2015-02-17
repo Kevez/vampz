@@ -1,6 +1,5 @@
 * {
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
@@ -9,10 +8,10 @@ html, body {
 }
 
 body {
-	background: $app-bg;
+	background: url(https://s3-us-west-2.amazonaws.com/vampz-cdn/images/bg.png);
 	font: 16px 'Varela Round';
 	margin: 0 auto;
-	padding: 6rem 0;
+	padding: 8rem 0;
 }
 
 h1 {
@@ -63,6 +62,7 @@ table {
 
 td {
 	color: #000;
+  font-size: 1.2rem;
 
 	.btn {
 		width: 100%;
@@ -77,29 +77,32 @@ strong, b {
 	font-weight: bold;
 }
 
-body {background: url(https://s3-us-west-2.amazonaws.com/vampz-cdn/images/bg.png) !important;padding-top:60px;}
+table {
 
-table button, table input {width: 100%;}
+  input {
+    background: #5C3636;
+    border: 1px solid #000;
+    text-align: center;
+  }
 
-table input {
-  background: #5C3636;
-  border: 1px solid #000;
-  text-align: center;
-}
+  button {
+    width: 100%;
+  }
 
-table td {
-  color: #fff !important;
-  border: 1px solid #000 !important;
+  td {
+    color: #fff !important;
+    border: 1px solid #000 !important;
+  }
 }
 
 button {
   background: #6B0000;
   color: #eee;
   border: 1px solid #000 !important;
-}
 
-button.active {
-  background: #8F2A2A;
+  &.active {
+    background: #8F2A2A;
+  }
 }
 
 input {width:100%;padding:6px 0 5px 0;background: #333;border: 1px solid #000;text-align:center;}
@@ -117,14 +120,6 @@ input {width:100%;padding:6px 0 5px 0;background: #333;border: 1px solid #000;te
 #shrine-tpl,
 #skills-tpl,
 #trophies-tpl {display:none;}
-
-#header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  width: 100%;
-}
 
 #stats-row {
   padding-top: 5px;
@@ -144,13 +139,17 @@ input {width:100%;padding:6px 0 5px 0;background: #333;border: 1px solid #000;te
   padding-bottom: 40px;
 }
 
-#footer {
-  padding-top: 10px;
-  border-top: 2px solid #000;
-}
+.footer {
+  background: #300;
+  border-top: 1px solid #000;
+  bottom: 50px;
+  padding-top: 0.5rem;
+  position: fixed;
+  width: 100%;
 
-#footer div {
-  color: #fff;
+  div {
+    color: #fff;
+  }
 }
 
 #exp-bar {
@@ -183,10 +182,20 @@ input {width:100%;padding:6px 0 5px 0;background: #333;border: 1px solid #000;te
   font-weight: bold;
 }
 
-#label-level {font-size: 10px;}
+#label-level {
+  font-size: 1rem;
+}
+
 #stat-level {font-weight: bold;}
-#label-shards {color:#31BD31;font-size: 10px;}
-#stat-shards {color:#31BD31;font-weight: bold;}
+
+#label-shards {
+  color: #31BD31;
+  font-size: 1rem;
+}
+
+#stat-shards {
+  color: #31BD31;
+  font-weight: bold;}
 
 
 
@@ -237,5 +246,18 @@ input {width:100%;padding:6px 0 5px 0;background: #333;border: 1px solid #000;te
 
 .nav-label { font-size: 9px; }
 
-.mission-mastery-fill-holder {position:absolute;right:16px;top:9px;width:100px;height:12px;background:#111;overflow:hidden;}
-.mission-mastery-fill {height:100%;float:left;background:green;font-size:11px;}
+.mission-mastery-fill-holder {
+  overflow:hidden;
+  position: absolute;
+  right: 16px;
+  top: 4px;
+  width: 200px;
+
+  .fill {
+    background: #AB7558;
+    float: left;
+    font-size: 1.1rem;
+    height: 100%;
+    padding: 0.5rem 0 0.5rem 0.5rem;
+  }
+}
