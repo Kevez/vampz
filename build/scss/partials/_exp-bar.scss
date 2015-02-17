@@ -1,8 +1,15 @@
-.exp-bar {
-	background: green;
-	position: fixed;
-	text-align: center;
-	top: 60px;
-	width: 50%;
-	z-index: 5;
+#exp-bar-container {
+
+	#exp-values {
+		display: inline-block;
+		color: #fff;
+		width:100%;
+		font-size: 1.2rem;
+		left: 0;
+		position: absolute;
+		text-align: center;
+		top: 7px;
+		width:100%;
+		z-index: 500;
+	}
 }
