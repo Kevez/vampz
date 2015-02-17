@@ -1,5 +1,5 @@
 var app = {
-  apiUrl: 'http://frontendkev.com/vampz/',
+  apiUrl: 'http://52.10.69.156/vampz/',
   name: 'Test123',
   ajaxTimeout: 10000,
   ajaxTimeoutText: 'Looks like those pesky Werewolves are playing around with things again!',
