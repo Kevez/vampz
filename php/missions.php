@@ -1,5 +1,5 @@
 <?php
-include '../inc/functions.php';
+include 'inc/functions.php';
 
 define(MAX_MASTERY, 100);
 define(MASTERY_INCREASE_PER_MISSION, 25);

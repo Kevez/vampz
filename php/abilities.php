@@ -1,5 +1,5 @@
 <?php
-include '../inc/functions.php';
+include 'inc/functions.php';
 
 $uuid = '123456789'; // test uuid
 
