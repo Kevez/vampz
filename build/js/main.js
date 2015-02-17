@@ -68,7 +68,7 @@ function updateStats(userObj) {
 
   if (userObj.blood !== undefined) { $('#stat-blood').text(formatNumber(userObj.blood)); }
   if (userObj.energy !== undefined) { player.energy = userObj.energy; $('#stat-energy').text(userObj.energy); }
-  if (userObj.energyMax !== undefined) { $('#stat-energy-max').text(userObj.energyMax); }
+  if (userObj.max_energy !== undefined) { $('#stat-energy-max').text(userObj.max_energy); }
   
   player.areasUnlocked = userObj.areasUnlocked;
  
@@ -244,7 +244,7 @@ function loadPage(tpl, script) {
       $('#stat-sp').text(data.user.sp);
       $('.stat-atk').text(data.user.atk);
       $('.stat-def').text(data.user.def);
-      $('.stat-energyMax').text(data.user.energyMax);
+      $('.stat-energyMax').text(data.user.max_energy);
     }
 
     if (tpl == 'trophies') {
@@ -313,7 +313,7 @@ function nav(id) {
 }
 
 function changeArea(area) {
-  loadPage('missions', 'php/missions.php?area=' + area);
+  loadPage('missions', 'missions.php?area=' + area);
 }
 
 function addPlayer() {
@@ -322,7 +322,7 @@ function addPlayer() {
 
   var request = $.ajax({
     type: 'GET',
-    url: app.apiUrl + 'php/coven.php',
+    url: app.apiUrl + 'coven.php',
     data: { action: 'add-player', code: $('#player-code').val() },
     timeout: app.ajaxTimeout,
     dataType: 'json'
@@ -358,7 +358,7 @@ function battle(id) {
 
   var request = $.ajax({
     type: 'GET',
-    url: app.apiUrl + 'php/battle.php',
+    url: app.apiUrl + 'battle.php',
     data: { action: 'battle-player', id: id },
     timeout: app.ajaxTimeout,
     dataType: 'json'
@@ -404,7 +404,7 @@ function doMission(id) {
 
   var request = $.ajax({
     type: 'GET',
-    url: app.apiUrl + 'php/missions.php',
+    url: app.apiUrl + 'missions.php',
     data: { action: 'do-mission', missionid: id },
     timeout: app.ajaxTimeout,
     dataType: 'json'
