@@ -14,7 +14,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('concat-js', function() {
-  gulp.src('./build/js/**/*.js')
+  gulp.src('./build/js/main.js')
     .pipe(concat('main.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./assets/js'))

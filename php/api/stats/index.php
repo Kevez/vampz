@@ -7,7 +7,7 @@ $db = new Db();
 $user = new User();
 $user->setDb($db);
 
-$user = $user->getStats();
+$user = $user->getStats('123456789');
 
 $ar = array(
 	'user' => $user

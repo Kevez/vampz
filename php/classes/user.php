@@ -8,17 +8,17 @@ Class User {
 		$this->_db = $db->conn;
 	}
 
-	public function getStats() {
+	public function getStats($uuid) {
 
 		$user = array();
 
-		// $result = $this->_db->query("SELECT id, username FROM users WHERE id = 1");
-		// while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-		// 	array_push($user, $row);
-		// }
-
-		$result = $this->_db->query("SELECT username, level, exp, exp_level FROM users WHERE id = 1");
+		$result = $this->_db->query("SELECT level, exp, blood, max_energy FROM users WHERE uuid = {$uuid}");
 		$user = $result->fetch_array(MYSQLI_ASSOC);
+
+		// calc'd on fly
+		$user['blood'] = number_format($user['blood']);
+		$user['exp_level'] = $user['level'] * 5;
+		$user['energy'] = 10;
 
 		return $user;
 	}

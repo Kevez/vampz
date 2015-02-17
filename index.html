@@ -1,48 +1,250 @@
-<!doctype html>
-<html ng-app="app">
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Whitelabel Mobile RPG</title>
-	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Varela+Round' />
-	<link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/vampz-cdn/main.css" />
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-</head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Vampz - A Vampire Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Varela+Round' />
+    <link rel="stylesheet" href="assets/css/old.css" />
+  </head>
 
-<body>
-	<div class="container">
-		<header class="header" ng-controller="HeaderCtrl">
-			<ul>
-				<li>
-					<span class="label">Username</span>
-					<span class="value">{{user.username}}</span>
-				</li>
-				<li>
-					<span class="label">Level</span>
-					<span class="value">{{user.level}}</span>
-				</li>
-				<li>
-					<span class="label">Exp</span>
-					<span class="value">{{user.exp}}/{{user.exp_level}}</span>
-				</li>
-			</ul>
-		</header>
-		<section id="content">
-			<div class="inner-content">
-				<ng-view></ng-view>	
-			</div>
-		</section>
-		<nav class="nav">
-			<ul>
-				<li><a href="#/stats">Stats</a></li>
-				<li><a href="#/quests">Quests</a></li>
-				<li><a href="#/fight">Fight</a></li>
-				<li><a href="#/skills">Skills</a></li>
-			</ul>
-		</nav>
-	</div>
+  <body>
 
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.1/angular-route.js"></script>
-	<script src="https://s3-us-west-2.amazonaws.com/vampz-cdn/main.js"></script>
-</body>
+    <div class="container">
+      <header id="header">
+        <div class="row" id="stats-row">
+          <div class="col-xs-3 text-center"><i class="fa fa-tint red-text"></i> <span id="stat-blood">-</span><br/><span id="app-blood">Blood</span></div>    
+          <div class="col-xs-3">
+            <div id="energy-values"><i class="fa fa-bolt"></i> <span id="stat-energy">-</span>/<span id="stat-energy-max">-</span><br/><span id="energy-timer">-</span></div>
+          </div>
+          <div class="col-xs-3 text-center"><i class="fa fa-shield blue-text"></i> <span id="stat-level" class="blue-text">-</span><br/><span id="label-level" class="blue-text">Level</div>
+          <div class="col-xs-3 text-center"><i class="fa fa-codepen green-text"></i> <span id="stat-shards">0</span><br/><span id="label-shards">Shards</span></div>    
+        </div>
+        <div class="row" id="exp-bar-container">
+          <div class="col-xs-12">
+          <span id="exp-values"></span>
+            <div id="exp-bar" class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                <span class="sr-only"></span>
+              </div>
+            </div>
+          </div>
+          <div id="header-border" class="col-xs-12">
+          </div>
+        </div>
+        <div id="loading"><i class="fa fa-spinner fa-spin" style="font-size:80px;color:#CC4A4A"></i></div>
+      </header>
+      <section id="content">
+        <p></p>
+      </section>
+      <footer id="footer" class="navbar navbar-fixed-bottom"></footer>
+    </div>
+
+    <!-- //// STATS TEMPLATE /// -->
+    <div id="stats-tpl">
+      <h3>Stats</h3>
+
+      <table class="table table-striped table-bordered">
+        <tr><td class="col-xs-1"><button class="btn" onclick="nav(2)">Missions</button></td><td class="col-xs-1"><button class="btn" onclick="nav(3)">Battle</button></td></tr>
+        <tr><td class="col-xs-1"><button class="btn" onclick="nav(7)">Skills</button></td><td class="col-xs-1"><button class="btn" onclick="nav(8)">Settings</button></td></tr>
+        <tr><td class="col-xs-1"><button class="btn" onclick="nav(4)">Abilities</button></td><td class="col-xs-1"><button class="btn" onclick="nav(5)">My Coven</button></td></tr>
+        <tr><td class="col-xs-1"><button class="btn" onclick="nav(9)">Trophies</button></td><td class="col-xs-1"><button class="btn" onclick="nav(10)">FAQ</button></td></tr>
+      </table>
+
+      <div class="panel">
+        <div class="panel-heading">Your Stats</div>
+        <div class="panel-body">
+          <table class="table table-striped table-bordered">
+            <tr><td class="col-xs-1">Attack</td><td id="stat-atk" class="col-xs-1 dynamic-value"></td></tr>
+            <tr><td class="col-xs-1">Defence</td><td id="stat-def" class="col-xs-1 dynamic-value"></td></tr>
+            <tr><td class="col-xs-1">Battles Won</td><td id="stat-battles-won" class="col-xs-1 dynamic-value"></td></tr>
+            <tr><td class="col-xs-1">Skill Points</td><td id="stat-sp" class="col-xs-1 dynamic-value"></td></tr>
+            <tr><td class="col-xs-1">Missions Completed</td><td id="stat-missions-completed" class="col-xs-1 dynamic-value"></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- //// END STATS TEMPLATE /// -->
+
+    <!-- //// MISSIONS TEMPLATE /// -->
+    <div id="missions-tpl">
+      <h3>Missions</h3>
+      <p>Complete missions to receive Blood, EXP and Loot.</p>
+
+      <table id="area-buttons" class="table table-striped table-bordered">
+        <tr><td class="col-xs-1"><button class="btn" onclick="changeArea(1)">Act I</button></td><td class="col-xs-1"><button class="btn" onclick="changeArea(2)">Act II</button></td>
+        <td class="col-xs-1"><button class="btn" onclick="changeArea(3)">Act III</button></td><td class="col-xs-1"><button class="btn" onclick="changeArea(4)">Act IV</button></td></tr>
+      </table>
+
+      <div id="missions-table">
+      </div>
+
+      <div class="alert alert-warning alert-dismissable">
+        You can unlock more missions by increasing your level.
+      </div>
+    </div>
+    <!-- //// END MISSIONS TEMPLATE /// -->
+
+    <!-- //// BATTLE TEMPLATE /// -->
+    <div id="battle-tpl">
+      <h3>Battle</h3>
+      <p>Slay other vampires for blood, experience and most importantly, respect.</p>
+
+      <div class="panel" id="attackable-players">
+        <div class="panel-heading">Attackable Players</div>
+        <div id="attackable-players-list" class="panel-body">
+        
+        </div>
+      </div>
+
+      <div class="alert alert-warning alert-dismissable">
+        Be sure to attack players close to your level to increase your chances of winning the battle.
+      </div>
+    </div>
+    <!-- //// END BATTLE TEMPLATE /// -->
+
+    <!-- //// ABILITIES TEMPLATE /// -->
+    <div id="abilities-tpl">
+      <h3>Abilities</h3>
+      <p>Abilities will aid you in quests and make you stronger in battle.</p>
+
+      <div class="panel">
+        <div class="panel-heading">Available Abilities</div>
+        <div id="abilities-list" class="panel-body">
+        </div>
+      </div>
+
+      <div class="alert alert-warning">
+        More Abilities will unlock as you level up.
+      </div>
+    </div>
+    <!-- //// END ABILITIES TEMPLATE /// -->
+
+    <!-- //// COVEN TEMPLATE /// -->
+    <div id="coven-tpl">
+      <h3>Coven</h3>
+      <p>Recruit players to your Coven by entering their ID in the box below:</p>
+
+      <p><input id="player-code" placeholder="Enter a code" /></p>
+      <p><button class="btn" onclick="addPlayer()">Add To My Coven</button></p>
+
+      <p>You can also pass your code to your friends so they can add you to their Coven.</p>
+      <p id="coven-code" style="text-align:center;font-size:22px" class="blue-text">-</p>
+
+      <div class="panel">
+        <div class="panel-heading">Coven Members</div>
+        <div id="coven-members-list" class="panel-body">
+        
+        </div>
+      </div>
+    </div>
+    <!-- //// END COVEN TEMPLATE /// -->
+
+    <!-- //// SHRINE TEMPLATE /// -->
+    <div id="shrine-tpl">
+      <h3>Shrine</h3>
+      <p>Here you can purchase upgrades in exhange for Shards.</p>
+
+      <table class="table table-striped table-bordered">
+        <tr><td class="col-xs-1"><button class="btn" onclick="creditsTab(8)">Purchase Shards</button></td><td class="col-xs-1"><button class="btn" onclick="creditsTab(\'spend\')">Purchase Upgrades</button></td></tr>
+      </table>
+
+      <div class="panel" id="buy-shards">
+        <div class="panel-heading">Buy Shards</div>
+        <div id="shard-packs" class="panel-body">
+        
+        </div>
+      </div>
+
+      <div class="panel" id="spend-shards">
+        <div class="panel-heading">Spend Shards</div>
+        <div id="upgrades-list" class="panel-body">
+        
+        </div>
+      </div>
+
+      <div class="alert alert-warning">
+        All purchases are processed through Google Play so you can be sure that your payment is safe and secure.
+      </div>
+    </div>
+    <!-- //// END SHRINE TEMPLATE /// -->
+
+    <!-- //// SKILLS TEMPLATE /// -->
+    <div id="skills-tpl">
+      <h3>Skills</h3>
+      <p>Upgrade your skill set below using SP. Each upgrade will cost you 1 SP.</p>
+      <p>You have a grand total of <span id="stat-sp" class="dynamic-value"></span> SP.</p>
+
+      <div class="panel">
+        <div class="panel-heading">Test</div>
+        <div class="panel-body">
+          <table id="skills-table" class="table table-striped table-bordered">
+            <tr><td>Attack</td><td class="stat-atk"></td><td><button class="btn" onclick="upgradeSkill(1)"><i class="fa fa-plus"></i></button></td></tr>
+            <tr><td>Defence</td><td class="stat-def"></td><td><button class="btn" onclick="upgradeSkill(2)"><i class="fa fa-plus"></i></button></td></tr>
+            <tr><td>Max Energy</td><td class="stat-energyMax"></td><td><button class="btn" onclick="upgradeSkill(3)"><i class="fa fa-plus"></i></button></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- //// END SKILLS TEMPLATE /// -->
+
+    <!-- //// TROPHIES TEMPLATE /// -->
+    <div id="trophies-tpl">
+      <h3>Trophies</h3>
+      <p>Can you collect them all?</p>
+
+      <div class="panel">
+        <div class="panel-heading">Trophy Cabinet</div>
+        <div class="panel-body">
+          <table id="trophies-table" class="table table-striped table-bordered">
+            <tr>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy yellow-text"></i><br/>Reach Level 5</td>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy yellow-text"></i><br/>Reach Level 10</td>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy yellow-text"></i><br/>Reach Level 20</td>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy yellow-text"></i><br/>Reach Level 50</td>
+            </tr>
+            <tr>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy yellow-text"></i><br/>Complete 10 Missions</td>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy yellow-text"></i><br/>Complete 50 Missions</td>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy yellow-text"></i><br/>Complete 100 Missions</td>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy yellow-text"></i><br/>Complete 250 Missions</td>
+            </tr>
+            <tr>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy yellow-text"></i><br/>Win 5 Battles</td>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy yellow-text"></i><br/>Win 20 Battles</td>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy yellow-text"></i><br/>Win 50 Battles</td>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy yellow-text"></i><br/>Win 100 Battles</td>
+            </tr>
+            <tr>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy grey-text"></i><br/>Master 5 Missions</td>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy grey-text"></i><br/>Master 10 Missions</td>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy grey-text"></i><br/>Master 25 Missions</td>
+                <td class="col-xs-1 text-center"><i class="fa fa-trophy grey-text"></i><br/>Master 40 Missions</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- //// END TROPHIES TEMPLATE /// -->
+
+    <!-- //// MORE TEMPLATE /// -->
+    <div id="more-tpl">
+
+      <table class="table table-striped table-bordered">
+        <tr><td class="col-xs-1"><button class="btn" onclick="nav(8)">Character</button></td></tr>
+        <tr><td class="col-xs-1"><button class="btn" onclick="nav(8)">Shrine</button></td></tr>
+      </table>
+
+      <div class="alert alert-warning">
+        Test
+      </div>
+    </div>
+    <!-- //// END MORE TEMPLATE /// -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
 </html>

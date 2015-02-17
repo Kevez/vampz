@@ -30,20 +30,20 @@ Class Quest {
 		$quest['blood'] = 5;
 		$quest['energyUsed'] = 1;
 
-		$result = $this->_db->query("SELECT exp, exp_level FROM users WHERE id = 1");
+		$result = $this->_db->query("SELECT exp FROM users WHERE uuid = 123456789");
 		$user = $result->fetch_array(MYSQLI_ASSOC);
 
 		$user['exp'] += $quest['exp'];
 
 		$this->_db->query("UPDATE users SET exp = {$user['exp']} WHERE id = 1");
 
-		if ($user['exp'] >= $user['exp_level']) {
+		if ($user['exp'] >= (5 * $user['level'])) {
 
 			$user['level'] += 1;
 			$user['exp'] = $user['exp'] - $user['exp_level'];
 			$user['exp_level'] = $user['exp_level'] + $user['level'];
 
-			$this->_db->query("UPDATE users SET level = {$user['level']}, exp = {$user['exp']}, exp_level = {$user['exp_level']} WHERE id = 1");
+			$this->_db->query("UPDATE users SET level = {$user['level']}, exp = {$user['exp']} WHERE id = 1");
 		}
 
 		$ar['user'] = $user;
