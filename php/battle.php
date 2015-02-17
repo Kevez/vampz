@@ -10,7 +10,7 @@ switch ($action) {
 	case 'get-attackable-players':
 
 	// pull out some players
-	$db->query("SELECT id, level FROM bl_users WHERE uuid != '{$uuid}' ORDER BY level DESC LIMIT 5");
+	$db->query("SELECT id, level FROM users WHERE uuid != '{$uuid}' ORDER BY level DESC LIMIT 5");
 	$db->bind(':uuid', $uuid);
 	$players = $db->resultset();
 
@@ -25,7 +25,7 @@ switch ($action) {
 	$error = false;
 	$energyused = 1;
 
-	$db->query('SELECT level, exp, blood, energyMax, energyMaxedAt FROM bl_users WHERE uuid = :uuid');
+	$db->query('SELECT level, exp, blood, energyMax, energyMaxedAt FROM users WHERE uuid = :uuid');
 	$db->bind(':uuid', $uuid);
 	$user = $db->single();
 
@@ -70,7 +70,7 @@ switch ($action) {
 			$user['energy'] = $user['energyMax'];
 			$user['levelUp'] = true;
 
-			$db->query("UPDATE bl_users SET level = {$user['level']},
+			$db->query("UPDATE users SET level = {$user['level']},
 																		  exp = {$user['exp']},
 																		  blood = {$user['blood']},
 																		  energyMaxedAt = {$user['energyMaxedAt']},
@@ -80,7 +80,7 @@ switch ($action) {
 			$db->execute();
 		}
 
-		$db->query("UPDATE bl_users SET exp = {$user['exp']},
+		$db->query("UPDATE users SET exp = {$user['exp']},
 																		blood = {$user['blood']},
 																		energyMaxedAt = {$user['energyMaxedAt']},
 																		battlesWon = battlesWon + 1

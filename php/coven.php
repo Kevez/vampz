@@ -11,7 +11,7 @@ switch ($action) {
 
 	$players = array(); 
 
-	$db->query('SELECT u.level, uc.pid FROM bl_users u, bl_users_coven uc WHERE u.id = uc.pid AND uc.uuid = :uuid');
+	$db->query('SELECT u.level, uc.pid FROM users u, users_coven uc WHERE u.id = uc.pid AND uc.uuid = :uuid');
 	$db->bind(':uuid', $uuid);
 	$row = $db->resultset();
 	
@@ -24,7 +24,7 @@ switch ($action) {
 	$code = $_GET['code']; settype($code, 'integer');
 	$exists = false;
 
-	$db->query("SELECT id FROM bl_users WHERE id = :code");
+	$db->query("SELECT id FROM users WHERE id = :code");
 	$db->bind(':code', $code);
 	$player = $db->single();
 
@@ -34,7 +34,7 @@ switch ($action) {
 
 		//TODO: Check if this player is not already in their coven. Do not add if so.
 
-		$db->query("INSERT INTO bl_users_coven (uuid, pid) VALUES (:uuid, :code)");
+		$db->query("INSERT INTO users_coven (uuid, pid) VALUES (:uuid, :code)");
 		$db->bind(':uuid', $uuid);
 		$db->bind(':code', $code);
 		$db->execute();

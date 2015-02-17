@@ -25,7 +25,7 @@ switch ($action) {
 		$fields = substr($fields, 0, -2);
 
 		// get player's level and mission progress for this area
-		$db->query("SELECT u.level, {$fields} FROM bl_users u, bl_users_missions um WHERE u.uuid = um.uuid AND u.uuid = :uuid");
+		$db->query("SELECT u.level, {$fields} FROM users u, users_missions um WHERE u.uuid = um.uuid AND u.uuid = :uuid");
 		$db->bind(':uuid', $uuid);
 		$user = $db->single();
 
@@ -45,7 +45,7 @@ switch ($action) {
 		$mission = array();
 
 		// select player details
-		$db->query('SELECT level, exp, blood, energyMax, energyMaxedAt, areasUnlocked FROM bl_users WHERE uuid = :uuid');
+		$db->query('SELECT level, exp, blood, energyMax, energyMaxedAt, areasUnlocked FROM users WHERE uuid = :uuid');
 		$db->bind(':uuid', $uuid);
 		$user = $db->single();
 
@@ -86,7 +86,7 @@ switch ($action) {
 				$user['energy'] = $user['energyMax'];
 				$user['levelUp'] = true;
 
-				$db->query("UPDATE bl_users SET level = {$user['level']},
+				$db->query("UPDATE users SET level = {$user['level']},
 																			  exp = {$user['exp']},
 																			  blood = {$user['blood']},
 																			  energyMaxedAt = {$user['energyMaxedAt']},
@@ -97,7 +97,7 @@ switch ($action) {
 			}
 
 			// if player has required energy, update database
-			$db->query("UPDATE bl_users SET level = {$user['level']},
+			$db->query("UPDATE users SET level = {$user['level']},
 																			exp = {$user['exp']},
 																			blood = {$user['blood']},
 																			energyMaxedAt = {$user['energyMaxedAt']}
@@ -107,7 +107,7 @@ switch ($action) {
 
 			$adjustedmissionid = $id + 1;
 
-			$db->query("SELECT m{$adjustedmissionid} FROM bl_users_missions WHERE uuid = :uuid");
+			$db->query("SELECT m{$adjustedmissionid} FROM users_missions WHERE uuid = :uuid");
 			$db->bind(':uuid', $uuid);
 			$mprog = $db->single();
 
@@ -119,14 +119,14 @@ switch ($action) {
 					$mprog['m'.$adjustedmissionid] = 100;
 				}
 
-				$db->query("UPDATE bl_users_missions SET m{$adjustedmissionid} = {$mprog['m'.$adjustedmissionid]}
+				$db->query("UPDATE users_missions SET m{$adjustedmissionid} = {$mprog['m'.$adjustedmissionid]}
 																				 		 WHERE uuid = (:uuid)");
 				$db->bind(':uuid', $uuid);
 				$db->execute();
 
 				// if mission is now mastered, give the player 3 SP
 				if ($mprog['m'.$adjustedmissionid] == 100) {
-					$db->query("UPDATE bl_users SET sp = sp + 3
+					$db->query("UPDATE users SET sp = sp + 3
 																			WHERE uuid = (:uuid)");
 					$db->bind(':uuid', $uuid);
 					$db->execute();

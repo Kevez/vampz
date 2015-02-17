@@ -1,14 +1,14 @@
 <?php
 include 'inc/functions.php';
 
-$db->query('DELETE FROM bl_users');
+$db->query('DELETE FROM users');
 $db->execute();
 
-$db->query('DELETE FROM bl_users_abilities');
+$db->query('DELETE FROM users_abilities');
 $db->execute();
 
-$db->query('DELETE FROM bl_users_coven');
+$db->query('DELETE FROM users_coven');
 $db->execute();
 
-$db->query('DELETE FROM bl_users_missions');
+$db->query('DELETE FROM users_missions');
 $db->execute();

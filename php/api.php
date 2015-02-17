@@ -13,7 +13,7 @@ switch ($action) {
 
 	$newplayer = false;
 
-	$db->query('SELECT id FROM bl_users WHERE uuid = :uuid');
+	$db->query('SELECT id FROM users WHERE uuid = :uuid');
 	$db->bind(':uuid', $uuid);
 	$deviceexists = $db->rowCount();
 
@@ -22,22 +22,22 @@ switch ($action) {
 
 		$covencode = mt_rand(111111,999999);
 
-		$db->query('INSERT INTO bl_users (uuid, coven_code) VALUES (:uuid, :covencode)');
+		$db->query('INSERT INTO users (uuid, coven_code) VALUES (:uuid, :covencode)');
 		$db->bind(':uuid', $uuid);
 		$db->bind(':covencode', $covencode);
 		$db->execute();
 
-		$db->query('INSERT INTO bl_users_missions (uuid) VALUES (:uuid)');
+		$db->query('INSERT INTO users_missions (uuid) VALUES (:uuid)');
 		$db->bind(':uuid', $uuid);
 		$db->execute();
 
-		$db->query('INSERT INTO bl_users_abilities (uuid) VALUES (:uuid)');
+		$db->query('INSERT INTO users_abilities (uuid) VALUES (:uuid)');
 		$db->bind(':uuid', $uuid);
 		$db->execute();
 	}
 
 	// now select their row
-	$db->query('SELECT level, exp, blood, energyMax, energyMaxedAt, atk, def FROM bl_users WHERE uuid = :uuid');
+	$db->query('SELECT level, exp, blood, energyMax, energyMaxedAt, atk, def FROM users WHERE uuid = :uuid');
 	$db->bind(':uuid', $uuid);
 	$user = $db->single();
 
@@ -61,7 +61,7 @@ switch ($action) {
 	case 'page-stats':
 	{
 
-		$db->query('SELECT atk, def, sp, battlesWon FROM bl_users WHERE uuid = :uuid');
+		$db->query('SELECT atk, def, sp, battlesWon FROM users WHERE uuid = :uuid');
 		$db->bind(':uuid', $uuid);
 		$user = $db->single();
 		
@@ -73,7 +73,7 @@ switch ($action) {
 	case 'get-skills':
 
 	// get # of skill points
-	$db->query('SELECT atk, def, energyMax, sp FROM bl_users WHERE uuid = :uuid');
+	$db->query('SELECT atk, def, energyMax, sp FROM users WHERE uuid = :uuid');
 	$db->bind(':uuid', $uuid);
 	$user = $db->single();
 	
@@ -86,7 +86,7 @@ switch ($action) {
 	$id = $_GET['id']; settype($id, 'integer');
 
 	// get current skill points
-	$db->query('SELECT sp, energyMaxedAt FROM bl_users WHERE uuid = :uuid');
+	$db->query('SELECT sp, energyMaxedAt FROM users WHERE uuid = :uuid');
 	$db->bind(':uuid', $uuid);
 	$user = $db->single();
 
@@ -112,7 +112,7 @@ switch ($action) {
 			$user['secondsToMaxEnergy'] = $user['energyMaxedAt'] - $tstamp;
 		}
 
-		$db->query("UPDATE bl_users SET {$field} = {$field} + 1, 
+		$db->query("UPDATE users SET {$field} = {$field} + 1, 
 																		sp = {$user['sp']},
 																		energyMaxedAt = {$user['energyMaxedAt']}
 																		WHERE uuid = :uuid");
