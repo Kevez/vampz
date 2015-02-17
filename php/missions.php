@@ -45,7 +45,7 @@ switch ($action) {
 		$mission = array();
 
 		// select player details
-		$db->query('SELECT level, exp, blood, energyMax, energyMaxedAt, areasUnlocked FROM users WHERE uuid = :uuid');
+		$db->query('SELECT level, exp, blood, max_energy, energyMaxedAt, areasUnlocked FROM users WHERE uuid = :uuid');
 		$db->bind(':uuid', $uuid);
 		$user = $db->single();
 
@@ -57,7 +57,7 @@ switch ($action) {
 		}
 
 		$user['secondsToMaxEnergy'] = $user['energyMaxedAt'] - $tstamp;
-		$user['energy'] = calculateRemainingEnergy($user['secondsToMaxEnergy'], $user['energyMax']);
+		$user['energy'] = calculateRemainingEnergy($user['secondsToMaxEnergy'], $user['max_energy']);
 
 		if ($user['energy'] < 0) {
 			$ar = array('error' => true);
@@ -83,7 +83,7 @@ switch ($action) {
 				// replenish player's energy
 				$user['energyMaxedAt'] = $tstamp - 1;
 				$user['secondsToMaxEnergy'] = $user['energyMaxedAt'] - $tstamp;
-				$user['energy'] = $user['energyMax'];
+				$user['energy'] = $user['max_energy'];
 				$user['levelUp'] = true;
 
 				$db->query("UPDATE users SET level = {$user['level']},
