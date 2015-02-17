@@ -10,8 +10,8 @@ var app = {
     headerBorderBottom: '#111',
     footerBackground: '#300'/*'#fff'*/
   },
-  mainNavLabels: ['Home', 'Missions', 'Battle', 'Abilities', 'Coven', 'More...'],
-  mainNavIcons: ['university', 'university', 'group', 'group', 'group', 'university']
+  mainNavLabels: ['Home', 'Missions', 'Battle', 'Abilities', 'Coven'],
+  mainNavIcons: ['university', 'university', 'group', 'group', 'group']
 };
 
 var player = {
@@ -37,7 +37,7 @@ function formatNumber(x) {
 
 function buildNav() {
   for ( var i = 0; i < app.mainNavIcons.length; i++ ) {
-    $('.footer').append('<div class="col-xs-2 text-center nav-item" onclick="nav(' + (i + 1) + ')"><i class="fa fa-' + app.mainNavIcons[i] + '"></i><br/><span class="nav-label">' + app.mainNavLabels[i] + '</span></div>');
+    //$('.footer').append('<div class="col-xs-2 text-center nav-item" onclick="nav(' + (i + 1) + ')"><i class="fa fa-' + app.mainNavIcons[i] + '"></i><br/><span class="nav-label">' + app.mainNavLabels[i] + '</span></div>');
   }
 }
 
@@ -244,10 +244,6 @@ function loadPage(tpl, script) {
       console.log(data);
     }
 
-    if (tpl == 'more') {
-      console.log(data);
-    }
-
     hideLoading();
   });
 
@@ -297,7 +293,6 @@ function nav(id) {
   else if (id === 3) { loadPage('battle', 'battle.php?action=get-attackable-players'); }
   else if (id === 4) { loadPage('abilities', 'abilities.php?action=get-abilities'); }
   else if (id === 5) { loadPage('coven', 'coven.php'); }
-  else if (id === 6) { loadPage('more', 'api.php?action=get-shrine-data'); }
   else if (id === 7) { loadPage('skills', 'api.php?action=get-skills'); }
   else if (id === 8) { loadPage('shrine', 'api.php?action=get-shrine-data'); }
   else if (id === 9) { loadPage('trophies', 'trophies.php'); }
