@@ -37,7 +37,7 @@ switch ($action) {
 	}
 
 	// now select their row
-	$db->query('SELECT level, exp, blood, energyMax, energyMaxedAt, atk, def FROM users WHERE uuid = :uuid');
+	$db->query('SELECT level, exp, blood, max_energy, energyMaxedAt, atk, def FROM users WHERE uuid = :uuid');
 	$db->bind(':uuid', $uuid);
 	$user = $db->single();
 
@@ -47,11 +47,11 @@ switch ($action) {
 	$user['secondsToMaxEnergy'] = 0;
 
 	if ($user['energyMaxedAt'] < $tstamp) {
-		$user['energy'] = $user['energyMax'];
+		$user['energy'] = $user['max_energy'];
 	}
 	else {
 		$user['secondsToMaxEnergy'] = $user['energyMaxedAt'] - $tstamp;
-		$user['energy'] = calculateRemainingEnergy($user['secondsToMaxEnergy'], $user['energyMax']);
+		$user['energy'] = calculateRemainingEnergy($user['secondsToMaxEnergy'], $user['max_energy']);
 	}
 	
 	$ar = array('user' => $user, 'newplayer' => $newplayer, 'count' => $count);

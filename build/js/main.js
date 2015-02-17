@@ -15,7 +15,7 @@ var app = {
 };
 
 var player = {
-  deviceId: 00001,
+  deviceId: 123456789,
   level: 1,
   exp: 0,
   explvl: 3,
@@ -301,14 +301,14 @@ function hideLoading() {
 function nav(id) {
 
   if (id === 1) { loadPage('stats', 'api.php?action=page-stats'); }
-  else if (id === 2) { loadPage('missions', 'php/missions.php?area=1'); }
-  else if (id === 3) { loadPage('battle', 'php/battle.php?action=get-attackable-players'); }
-  else if (id === 4) { loadPage('abilities', 'php/abilities.php?action=get-abilities'); }
-  else if (id === 5) { loadPage('coven', 'php/coven.php'); }
+  else if (id === 2) { loadPage('missions', 'missions.php?area=1'); }
+  else if (id === 3) { loadPage('battle', 'battle.php?action=get-attackable-players'); }
+  else if (id === 4) { loadPage('abilities', 'abilities.php?action=get-abilities'); }
+  else if (id === 5) { loadPage('coven', 'coven.php'); }
   else if (id === 6) { loadPage('more', 'api.php?action=get-shrine-data'); }
   else if (id === 7) { loadPage('skills', 'api.php?action=get-skills'); }
   else if (id === 8) { loadPage('shrine', 'api.php?action=get-shrine-data'); }
-  else if (id === 9) { loadPage('trophies', 'php/trophies.php'); }
+  else if (id === 9) { loadPage('trophies', 'trophies.php'); }
 
 }
 
